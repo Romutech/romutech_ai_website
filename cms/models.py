@@ -16,3 +16,9 @@ class Features(models.Model):
 class Application(models.Model):
     titre   = models.CharField(max_length=200)
     button  = models.CharField(max_length=50)
+
+
+class Api(models.Model):
+    titre = models.CharField(max_length=200)
+    description = models.TextField()
+    
