@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col">
                     <div class="logo">
-                        <a href="#"><img src="images/logo.png" alt="Logo"></a>
+                        <a href="#"><img src="{{ home.logo }}" alt="Logo"></a><!-- images/logo.png -->
                     </div>
                 </div>
                 <div class="col text-right">
@@ -33,16 +33,32 @@
 </header>
 
 <section id="Home">
-    <img class="HeroB" src="images/banner.jpg">
+    <img class="HeroB" src="{{ home.picture }}"> <!-- images/banner.jpg -->
 </section>
 
 <section id="Features">
     <div class="container">
         <div class="title text-center">
-            <h1>Romutech AI</h1>
-            <p>Romutech AI sera une solution basée sur l'intelligence artificielle, qui permettra d'analyser des images, à l'aide de Computer Vision.</p>
+            <h1>{{ features.title }} <!-- Romutech AI--></h1>
+            <p>{{ features.description }} <!-- Romutech AI sera une solution basée sur l'intelligence artificielle, qui permettra d'analyser des images, à l'aide de Computer Vision.--></p>
         </div>
         <div class="row">
+
+            {% for feature in features.features %}
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                <div class="each-icon box-1">
+                    <div class="icon-wrap">
+                        <i class="fa fa-cogs"></i>
+                    </div>
+                    <div class="icon-text">
+                        <h3>{{ feature.title }}</h3>
+                        <p>{{ feature.content }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!--
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
                 <div class="each-icon box-1">
                     <div class="icon-wrap">
@@ -87,6 +103,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
     </div>
 </section>
@@ -95,10 +112,10 @@
     <div class="submit-btn">
         <div class="container">
             <div class="title text-center">
-                <h3>Lancer L'application Romutech AI</h3>
+                <h3>{{ application.title }}<!-- Lancer L'application Romutech AI --></h3>
                 <br>
                 <!--<p><a class="button_application" title="Romutech AI" href="https://google.fr"><i></i><button  type="submit"><span class="button_application">Romutech AI</span></button></a></p>-->
-                <p><a class="button_application" title="Romutech AI" href="#"><i></i><button  type="submit"><span class="button_application">Bientot disponible</span></button></a></p>
+                <p><a class="button_application" title="Romutech AI" href="#"><i></i><button  type="submit"><span class="button_application">{{ application.button }} <!-- Bientot disponible --></span></button></a></p>
             </div>
         </div>
     </div>
@@ -107,8 +124,8 @@
 <section id="Api" class="clearfix">
     <div class="container">
         <div class="title text-center">
-            <h3>L'API</h3>
-            <p>Une API sera mise à disponibilité des développeurs. le format d'échange de données sera le JSON.<br> </p>
+            <h3>{{ api.title }} <!--L'API --></h3>
+            <p>{{ api.description }} <!-- Une API sera mise à disponibilité des développeurs. le format d'échange de données sera le JSON. --><br></p>
         </div>
     </div>
 </section>
@@ -120,9 +137,9 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <div class="laptop-text">
-                    <h2>Documentation de l'API</h2>
-                    <p>Pour comprendre les rouages de l'API et pour pouvoir l'utiliser, une documentation sera disponible. <br>Vous y trouverez les différentes routes existantes et la manière de structurer le JSON.</p>
-                    <a href="#">Documentation</a>
+                    <h2>{{ documentation.title }} <!-- Documentation de l'API --></h2>
+                    <p>{{ documentation.description }} <!-- Pour comprendre les rouages de l'API et pour pouvoir l'utiliser, une documentation sera disponible. <br>Vous y trouverez les différentes routes existantes et la manière de structurer le JSON. --></p>
+                    <a href="#">{{ documentation.button }} <!-- Documentation --></a>
                 </div>
             </div>
         </div>
@@ -137,7 +154,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                     <div class="copy-right">
-                        <p>© Romutech | 2021</p>
+                        <p>{{ footer.content }} <!-- © Romutech | 2021 --></p>
                     </div>
                 </div>
             </div>
