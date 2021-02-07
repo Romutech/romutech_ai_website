@@ -3,8 +3,8 @@ from django.utils import timezone
 
 
 class Home(models.Model):
-    logo = models.ImageField(upload_to='logo')
-    picture = models.ImageField(upload_to='picture')
+    logo = models.ImageField(upload_to='cms/static/cms/images')
+    picture = models.ImageField(upload_to='cms/static/cms/images')
     date = models.DateTimeField(default=timezone.now)
 
     class Meta:

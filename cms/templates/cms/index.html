@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <header id="Header">
@@ -115,7 +116,9 @@
                 <h3>{{ application.title }}<!-- Lancer L'application Romutech AI --></h3>
                 <br>
                 <!--<p><a class="button_application" title="Romutech AI" href="https://google.fr"><i></i><button  type="submit"><span class="button_application">Romutech AI</span></button></a></p>-->
+                {% if application.button %}
                 <p><a class="button_application" title="Romutech AI" href="#"><i></i><button  type="submit"><span class="button_application">{{ application.button }} <!-- Bientot disponible --></span></button></a></p>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -139,7 +142,9 @@
                 <div class="laptop-text">
                     <h2>{{ documentation.title }} <!-- Documentation de l'API --></h2>
                     <p>{{ documentation.description }} <!-- Pour comprendre les rouages de l'API et pour pouvoir l'utiliser, une documentation sera disponible. <br>Vous y trouverez les différentes routes existantes et la manière de structurer le JSON. --></p>
+                    {% if documentation.button %}
                     <a href="#">{{ documentation.button }} <!-- Documentation --></a>
+                    {% endif %}
                 </div>
             </div>
         </div>
