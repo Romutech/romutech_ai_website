@@ -27,4 +27,7 @@ class Documentation(models.Model):
     titre       = models.CharField(max_length=200)
     description = models.TextField()
     button      = models.CharField(max_length=50)
-    
+
+
+class Footer(models.Model):
+    content = models.TextField()
