@@ -2,15 +2,6 @@ from django.db import models
 from django.utils import timezone
 
 
-class Home(models.Model):
-    logo = models.ImageField(upload_to='cms/static/cms/images')
-    picture = models.ImageField(upload_to='cms/static/cms/images')
-    date = models.DateTimeField(default=timezone.now)
-
-    class Meta:
-        verbose_name = "home"
-
-
 class Features(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
