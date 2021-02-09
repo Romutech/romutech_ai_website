@@ -44,6 +44,12 @@ ul, li {
 #Header .menu {
 	cursor: pointer;
 }
+.admin {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: #272822;
+}
 #nav-icon1 {
   width: 35px;
   height: 25px;
