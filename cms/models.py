@@ -2,14 +2,14 @@ from django.db import models
 from django.utils import timezone
 
 
-class Features(models.Model):
+class Presentation(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    features = models.JSONField(null=True)
+    features = models.JSONField()
     date = models.DateField(default=timezone.now)
 
     class Meta:
-        verbose_name = "features"
+        verbose_name = "presentation"
 
 
 class Application(models.Model):

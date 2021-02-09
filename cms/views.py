@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from cms.models import Features, Application, Api, Documentation, Footer
+from cms.models import Presentation, Application, Api, Documentation, Footer
 
 
 def index(request):
-    model_list = [Features, Application, Api, Documentation, Footer]
+    model_list = [Presentation, Application, Api, Documentation, Footer]
     data = {}
 
     for model in model_list:
