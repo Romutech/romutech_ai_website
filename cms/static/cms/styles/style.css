@@ -219,12 +219,12 @@ body.menu-active #Header .logo {
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 }
-#API_documentation {
+#Documentation {
 	padding: 45px 0;
 	background-color: #efefef;
 	position: relative;
 }
-#API_documentation::before {
+#Documentation::before {
 	background: url(../images/documentation.jpg) no-repeat 0 0;
 	content: "";
 	position: absolute;
@@ -233,20 +233,20 @@ body.menu-active #Header .logo {
 	width: 50%;
 	height: 100%;
 }
-#API_documentation .laptop-text {
+#Documentation .laptop-text {
 	padding-left: 12px;
 }
-#API_documentation .laptop-text h2 {
+#Documentation .laptop-text h2 {
 	font: 500 26px/115% 'Open Sans', sans-serif;
 	color: #333;
 	margin: 0 0 30px;
 }
-#API_documentation .laptop-text p {
+#Documentation .laptop-text p {
 	font: 400 16px/155% 'Open Sans', sans-serif;
 	color: #333;
 	margin: 0 0 30px;
 }
-#API_documentation .laptop-text a {
+#Documentation .laptop-text a {
 	display: inline-block;
 	padding: 10px 30px;
 	background-color: #19af83;
@@ -256,7 +256,7 @@ body.menu-active #Header .logo {
 	border: 1px solid #19af83;
 	font: 400 16px/115% 'Open Sans', sans-serif;
 }
-#API_documentation .laptop-text a:hover {
+#Documentation .laptop-text a:hover {
 	transition: all 0.25s ease 0s;
 	background-color: #fff;
 	color: #19af83;
@@ -733,7 +733,6 @@ body.menu-active #Header .logo {
 	transition: all 0.25s ease 0s;
 }
 #Footer .footer-text .email-box input.submit {
-	background: url(../images/email-box-arrow.png) no-repeat 0 5px;
 	padding: 0px 4px;
 	border: 0;
 	position: absolute;
