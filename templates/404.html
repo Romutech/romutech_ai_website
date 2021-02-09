@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<header id="Header">
+    <nav class="main-navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="logo">
+                        <a href="#"><img src="{% static 'cms/images/logo.png' %}"></a>
+                    </div>
+                </div>
+                <a class="admin" href="{% url 'admin:index' %}" >Admin</a>
+                <div class="col text-right">
+                    <div class="menu-wrap">
+                        <div id="nav-icon1">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#Home" class="smooth-scroll">Accueil</a></li>
+            <li><a href="#Features" class="smooth-scroll">Les Fonctionnalités</a></li>
+            <li><a href="#Application" class="smooth-scroll">L'application</a></li>
+            <li><a href="#Documentation" class="smooth-scroll">L'API</a></li>
+        </ul>
+    </div>
+</header>
+
+<section id="Home">
+    <img class="HeroB" src="{% static 'cms/images/banner_error.jpg' %}">
+</section>
+
+<section id="Features">
+    <div class="container">
+        <div class="title text-center">
+            <h1>404 page non trouvée</h1>
+            <p>La ressource demandée est introuvable sur ce serveur.</p>
+        </div>
+
+</section>
+
+<br><br><br>
+
+{% endblock %}
