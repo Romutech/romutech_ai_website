@@ -1,9 +1,10 @@
 from django.test import TestCase
 from .models import Presentation, Application, Api, Documentation, Footer
-
+from django.conf import settings
+from django.urls import reverse
 
 # **************************************************************************** #
-#                            Presentation Tests                                #
+#                       Presentation model test                                #
 # **************************************************************************** #
 
 class PresentationTest(TestCase):
@@ -93,7 +94,7 @@ class PresentationTest(TestCase):
 
 
 # **************************************************************************** #
-#                             Application Tests                                #
+#                          Application model test                              #
 # **************************************************************************** #
 
 class ApplicationTest(TestCase):
@@ -158,7 +159,7 @@ class ApplicationTest(TestCase):
 
 
 # **************************************************************************** #
-#                                 Api Tests                                    #
+#                             Api model test                                   #
 # **************************************************************************** #
 
 class ApiTest(TestCase):
@@ -218,5 +219,150 @@ class ApiTest(TestCase):
         api = self.model.objects.latest('id')
 
         api.delete()
+
+        self.assertEquals(self.model.objects.count(), 0)
+
+
+# **************************************************************************** #
+#                         Documentation model test                             #
+# **************************************************************************** #
+
+class DocumentationTest(TestCase):
+    def setUp(self):
+        self.model = Documentation
+
+        self.title = "Documentation de l'API"
+        self.description = "Une documentation est disponible. Vous y trouverez les différentes routes existantes, etc."
+        self.button = "Documentation"
+
+        self.bad_title = "Bad title"
+        self.wrong_description = "Wrong description"
+        self.bad_button = "Bad button"
+
+    def test_create_documentation(self):
+        self.assertEquals(Documentation.objects.count(), 0)
+
+        documentation = self.model.objects.create(title=self.title, description=self.description, button=self.button)
+
+        self.assertEquals(documentation.objects.count(), 1)
+        self.assertEquals(documentation.title, self.title)
+        self.assertEquals(documentation.description, self.description)
+        self.assertEquals(documentation.button, self.button)
+        self.assertNotEquals(documentation.title, self.bad_title)
+        self.assertNotEquals(documentation.description, self.wrong_description)
+        self.assertNotEquals(documentation.button, self.bad_button)
+
+
+    def test_create_documentation(self):
+        self.model.objects.create(title=self.title, description=self.description, button=self.button)
+
+        self.assertEquals(self.model.objects.count(), 1)
+
+        documentation = self.model.objects.latest('id')
+
+        self.assertEquals(documentation.title, self.title)
+        self.assertEquals(documentation.description, self.description)
+        self.assertEquals(documentation.button, self.button)
+        self.assertNotEquals(documentation.title, self.bad_title)
+        self.assertNotEquals(documentation.description, self.wrong_description)
+        self.assertNotEquals(documentation.button, self.bad_button)
+
+    def test_read_documentation(self):
+        self.model.objects.create(title=self.title, description=self.description, button=self.button)
+
+        self.assertEquals(self.model.objects.count(), 1)
+
+        documentation = self.model.objects.latest('id')
+
+        self.assertEquals(documentation.title, self.title)
+        self.assertEquals(documentation.description, self.description)
+        self.assertEquals(documentation.button, self.button)
+        self.assertNotEquals(documentation.title, self.bad_title)
+        self.assertNotEquals(documentation.description, self.wrong_description)
+        self.assertNotEquals(documentation.button, self.bad_button)
+
+    def test_update_documentation(self):
+        self.model.objects.create(title=self.title, description=self.description, button=self.button)
+
+        self.assertEquals(self.model.objects.count(), 1)
+
+        documentation = self.model.objects.latest('id')
+
+        self.assertEquals(documentation.title, self.title)
+        self.assertEquals(documentation.description, self.description)
+        self.assertEquals(documentation.button, self.button)
+
+        documentation.title = "New title"
+        documentation.save(update_fields=['title'])
+
+        self.assertEquals(documentation.title, "New title")
+        self.assertEquals(documentation.description, self.description)
+        self.assertEquals(documentation.button, self.button)
+
+    def test_delete_feature(self):
+        self.model.objects.create(title=self.title, description=self.description, button=self.button)
+
+        self.assertEquals(self.model.objects.count(), 1)
+
+        documentation = self.model.objects.latest('id')
+
+        documentation.delete()
+
+        self.assertEquals(self.model.objects.count(), 0)
+
+
+# **************************************************************************** #
+#                            Footer model test                                 #
+# **************************************************************************** #
+
+class FooterTest(TestCase):
+    def setUp(self):
+        self.model = Footer
+
+        self.content = "© Romutech | 2021"
+
+        self.bad_content = "Bad content"
+
+    def test_create_footer(self):
+        self.assertEquals(Footer.objects.count(), 0)
+
+        footer = self.model.objects.create(content=self.content)
+
+        self.assertEquals(Footer.objects.count(), 1)
+        self.assertEquals(footer.content, self.content)
+        self.assertNotEquals(footer.content, self.bad_content)
+
+    def test_read_footer(self):
+        self.model.objects.create(content=self.content)
+
+        self.assertEquals(self.model.objects.count(), 1)
+
+        footer = self.model.objects.latest('id')
+
+        self.assertEquals(footer.content, self.content)
+        self.assertNotEquals(footer.content, self.bad_content)
+
+    def test_update_footer(self):
+        self.model.objects.create(content=self.content)
+
+        self.assertEquals(self.model.objects.count(), 1)
+
+        footer = self.model.objects.latest('id')
+
+        self.assertEquals(footer.content, self.content)
+
+        footer.content = "New content"
+        footer.save(update_fields=['content'])
+
+        self.assertEquals(footer.content, "New content")
+
+    def test_delete_footer(self):
+        self.model.objects.create(content=self.content)
+
+        self.assertEquals(self.model.objects.count(), 1)
+
+        footer = self.model.objects.latest('id')
+
+        footer.delete()
 
         self.assertEquals(self.model.objects.count(), 0)
