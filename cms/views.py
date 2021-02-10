@@ -3,10 +3,9 @@ from cms.models import Presentation, Application, Api, Documentation, Footer
 
 
 def index(request):
-    model_list = [Presentation, Application, Api, Documentation, Footer]
     data = {}
 
-    for model in model_list:
+    for model in [Presentation, Application, Api, Documentation, Footer]:
         try:
             data[model._meta.verbose_name] = model.objects.latest('id')
         except:
