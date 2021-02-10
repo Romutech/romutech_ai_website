@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'romutech_ai_website.urls'
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "django.template.context_processors.i18n",
             ],
         },
     },
@@ -106,18 +108,29 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# Nous avons par défaut écrit l'application en français
+LANGUAGE_CODE = 'fr-fr'
 
-TIME_ZONE = 'UTC'
-
+# Nous souhaitons générer des fichiers contenant les traductions,
+# afin de permettre à l'utilisateur de choisir sa langue par la suite
 USE_I18N = True
 
+# Nous adaptons les formats d'écriture de certains champs à la langue française
 USE_L10N = True
 
-USE_TZ = True
+gettext = lambda x: x
+
+LANGUAGES = (
+   ('fr', gettext('French')),
+   ('en', gettext('English')),
+)
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'cms/locale/'),
+)

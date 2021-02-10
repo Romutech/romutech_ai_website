@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  // banner slider 
+  // banner slider
   var owl = $('#BannerSlider').owlCarousel({
     loop: true,
     margin: 0,
@@ -32,7 +32,7 @@ $(document).ready(function() {
     $("body").toggleClass("menu-active");
   });
   //menu link click
-  // magnific video popup  
+  // magnific video popup
   $('.popup-youtube-wst').magnificPopup({
     type: 'iframe',
     mainClass: 'mfp-fade',
