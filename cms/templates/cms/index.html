@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <header id="Header">
@@ -72,7 +73,7 @@
                 <h3>{{ application.title }}</h3>
                 <br>
                 {% if application.button %}
-                <p><a class="button_application" title="Romutech AI" href="#"><i></i><button  type="submit"><span class="button_application">{{ application.button }}</span></button></a></p>
+                <p><a title="Romutech AI" href="#"><i></i><button  type="submit"><span class="button_application">{{ application.button }}</span></button></a></p>
                 {% endif %}
             </div>
         </div>
@@ -107,5 +108,7 @@
 </section>
 
 <br><br><br>
+
+{% include "cms/popup.html" %}
 
 {% endblock %}

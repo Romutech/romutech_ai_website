@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from cms.models import Presentation, Application, Api, Documentation, Footer
 
+from django.utils.translation import ugettext as _
+from django.utils.translation import ungettext
+
 
 def index(request):
     data = {}

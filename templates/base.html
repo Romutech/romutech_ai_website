@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html>
@@ -22,6 +23,7 @@
         <script type="text/javascript" src="{% static 'cms/script/jquery-3.2.1.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'cms/script/all-plugins.js' %}"></script>
         <script type="text/javascript" src="{% static 'cms/script/plugin-active.js' %}"></script>
+        <script type="text/javascript" src="{% static 'cms/script/script.js' %}"></script>
     </head>
 
     <body>
@@ -34,6 +36,9 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="copy-right">
                                 <p>{{ footer.content|default:"© Romutech | 2021"}}</p>
+                                <span class="button_pop change_lang">
+                                    <a href="#" class="popup-light" data-popup-class="popup-block">Change the language</a>
+                                </span>
                             </div>
                         </div>
                     </div>
