@@ -1,0 +1,18 @@
+<section class="popup-block">
+    <div class="container">
+        <div class="title text-center">
+            <h3>Changer la langue</h3>
+            <br>
+            <form action="/i18n/setlang/" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{% url 'index' %}" />
+                    <select name="language">
+                        {% for lang in LANGUAGES %}
+                            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+                        {% endfor %}
+                    </select>
+                <input  class="button_pop" type="submit" />
+            </form>
+        </div>
+    </div>
+</section>

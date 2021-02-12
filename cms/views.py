@@ -15,7 +15,3 @@ def index(request):
             pass
 
     return render(request, 'cms/index.html', data)
-
-
-def test_i18n(request):
-    return render(request, 'cms/langue.html')
