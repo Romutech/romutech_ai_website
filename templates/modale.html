@@ -1,8 +1,11 @@
-<section class="popup-block">
-    <div class="container">
-        <div class="title text-center">
-            <h3>Changer la langue</h3>
-            <br>
+{% load static %}
+
+<div class="modale">
+    <div>
+        <div class="message">
+            <p>
+                <h4>Change the language</h4>
+            </p>
             <form action="/i18n/setlang/" method="post">
                 {% csrf_token %}
                 <input name="next" type="hidden" value="{% url 'index' %}" />
@@ -11,8 +14,9 @@
                             <option value="{{ lang.0 }}">{{ lang.1 }}</option>
                         {% endfor %}
                     </select>
-                <input  class="button_pop" type="submit" />
+                <input  class="modale_button" type="submit" />
             </form>
+            <a id="modale_close"><img class="close" src="{% static 'cms/images/close.png' %}"></a>
         </div>
     </div>
-</section>
+</div>
