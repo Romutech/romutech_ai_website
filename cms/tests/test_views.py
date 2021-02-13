@@ -7,10 +7,10 @@ class ViewsTest(TestCase):
     def setUp(self):
         self.url = reverse('index')
 
-        self.presentation = Presentation.objects.create(
-            title = "Romutech AI",
-            description = "Romutech AI est une solution basée sur l'intelligence artificielle.",
-            features = [
+        self.presentation = {
+            'title': "Romutech AI",
+            'description': "Romutech AI est une solution basée sur l'intelligence artificielle.",
+            'features': [
                 {
                     "title": "Détection de visage",
                     "content": "La solution permet de detecter des visages."
@@ -20,31 +20,205 @@ class ViewsTest(TestCase):
                     "content": "La solution permet d'automatiser le floutage des visages sur une photo."
                 }
             ]
-        )
-        self.application = Application.objects.create(title="Lancer L'application Romutech AI", button="Romutech AI")
-        self.api = Api.objects.create(title="L'API", description="Une API est mise à disponibilité des développeurs.")
-        self.documentation = Documentation.objects.create(
-            title = "Documentation de l'API",
-            description = "Une documentation est disponible. Vous y trouverez les différentes routes existantes, etc.",
-            button = "Documentation"
-        )
-        self.footer = Footer.objects.create(content="© Romutech | 2021")
+        }
+        self.application = {'title': "Lancer L'application Romutech AI", 'button': "Romutech AI"}
+        self.api = {'title': "L'API", 'description': "Une API est mise à disponibilité des développeurs."}
+        self.documentation  = {
+            'title': "Documentation de l'API",
+            'description': "Une documentation est disponible. Vous y trouverez les différentes routes existantes, etc.",
+            'button': "Documentation"
+        }
+        self.footer = {'content': "© Romutech | 2021"}
 
 
     def test_index_view(self):
+        Presentation.objects.create(
+            title=self.presentation['title'],
+            description=self.presentation['description'],
+            features=self.presentation['features']
+        )
+        Application.objects.create(title=self.application['title'], button=self.application['button'])
+        Api.objects.create(title=self.api['title'], description=self.api['description'])
+        Documentation.objects.create(
+            title=self.documentation['title'],
+            description=self.documentation['description'],
+            button=self.documentation['button']
+        )
+        Footer.objects.create(content=self.footer['content'])
+
         response = self.client.get(self.url)
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'cms/index.html')
+        self.assertTemplateUsed(response, 'modal.html')
         self.assertTemplateUsed(response, 'base.html')
         self.assertTemplateNotUsed(response, 'menu.html')
         self.assertTemplateNotUsed(response, '404.html')
         self.assertTemplateNotUsed(response, '500.html')
-        self.assertEquals(response.context['presentation'], self.presentation)
-        self.assertEquals(response.context['application'], self.application)
-        self.assertEquals(response.context['api'], self.api)
-        self.assertEquals(response.context['documentation'], self.documentation)
-        self.assertEquals(response.context['footer'], self.footer)
+        self.assertIn('presentation', response.context)
+        self.assertIn('application', response.context)
+        self.assertIn('api', response.context)
+        self.assertIn('documentation', response.context)
+        self.assertIn('footer', response.context)
+
+
+    def test_index_view_without_presentation(self):
+        Application.objects.create(title=self.application['title'], button=self.application['button'])
+        Api.objects.create(title=self.api['title'], description=self.api['description'])
+        Documentation.objects.create(
+            title=self.documentation['title'],
+            description=self.documentation['description'],
+            button=self.documentation['button']
+        )
+        Footer.objects.create(content=self.footer['content'])
+
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'cms/index.html')
+        self.assertTemplateUsed(response, 'modal.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateNotUsed(response, 'menu.html')
+        self.assertTemplateNotUsed(response, '404.html')
+        self.assertTemplateNotUsed(response, '500.html')
+        self.assertNotIn('presentation', response.context)
+        self.assertIn('application', response.context)
+        self.assertIn('api', response.context)
+        self.assertIn('documentation', response.context)
+        self.assertIn('footer', response.context)
+
+
+    def test_index_view_without_application(self):
+        Presentation.objects.create(
+            title=self.presentation['title'],
+            description=self.presentation['description'],
+            features=self.presentation['features']
+        )
+        Api.objects.create(title=self.api['title'], description=self.api['description'])
+        Documentation.objects.create(
+            title=self.documentation['title'],
+            description=self.documentation['description'],
+            button=self.documentation['button']
+        )
+        Footer.objects.create(content=self.footer['content'])
+
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'cms/index.html')
+        self.assertTemplateUsed(response, 'modal.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateNotUsed(response, 'menu.html')
+        self.assertTemplateNotUsed(response, '404.html')
+        self.assertTemplateNotUsed(response, '500.html')
+        self.assertIn('presentation', response.context)
+        self.assertNotIn('application', response.context)
+        self.assertIn('api', response.context)
+        self.assertIn('documentation', response.context)
+        self.assertIn('footer', response.context)
+
+
+    def test_index_view_without_api(self):
+        Presentation.objects.create(
+            title=self.presentation['title'],
+            description=self.presentation['description'],
+            features=self.presentation['features']
+        )
+        Application.objects.create(title=self.application['title'], button=self.application['button'])
+        Documentation.objects.create(
+            title=self.documentation['title'],
+            description=self.documentation['description'],
+            button=self.documentation['button']
+        )
+        Footer.objects.create(content=self.footer['content'])
+
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'cms/index.html')
+        self.assertTemplateUsed(response, 'modal.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateNotUsed(response, 'menu.html')
+        self.assertTemplateNotUsed(response, '404.html')
+        self.assertTemplateNotUsed(response, '500.html')
+        self.assertIn('presentation', response.context)
+        self.assertIn('application', response.context)
+        self.assertNotIn('api', response.context)
+        self.assertIn('documentation', response.context)
+        self.assertIn('footer', response.context)
+
+
+    def test_index_view_without_documentation(self):
+        Presentation.objects.create(
+            title=self.presentation['title'],
+            description=self.presentation['description'],
+            features=self.presentation['features']
+        )
+        Application.objects.create(title=self.application['title'], button=self.application['button'])
+        Api.objects.create(title=self.api['title'], description=self.api['description'])
+        Footer.objects.create(content=self.footer['content'])
+
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'cms/index.html')
+        self.assertTemplateUsed(response, 'modal.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateNotUsed(response, 'menu.html')
+        self.assertTemplateNotUsed(response, '404.html')
+        self.assertTemplateNotUsed(response, '500.html')
+        self.assertIn('presentation', response.context)
+        self.assertIn('application', response.context)
+        self.assertIn('api', response.context)
+        self.assertNotIn('documentation', response.context)
+        self.assertIn('footer', response.context)
+
+
+    def test_index_view_without_footer(self):
+        Presentation.objects.create(
+            title=self.presentation['title'],
+            description=self.presentation['description'],
+            features=self.presentation['features']
+        )
+        Application.objects.create(title=self.application['title'], button=self.application['button'])
+        Api.objects.create(title=self.api['title'], description=self.api['description'])
+        Documentation.objects.create(
+            title=self.documentation['title'],
+            description=self.documentation['description'],
+            button=self.documentation['button']
+        )
+
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'cms/index.html')
+        self.assertTemplateUsed(response, 'modal.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateNotUsed(response, 'menu.html')
+        self.assertTemplateNotUsed(response, '404.html')
+        self.assertTemplateNotUsed(response, '500.html')
+        self.assertIn('presentation', response.context)
+        self.assertIn('application', response.context)
+        self.assertIn('api', response.context)
+        self.assertIn('documentation', response.context)
+        self.assertNotIn('footer', response.context)
+
+
+    def test_index_view_with_no_data(self):
+        response = self.client.get(self.url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'cms/index.html')
+        self.assertTemplateUsed(response, 'modal.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateNotUsed(response, 'menu.html')
+        self.assertTemplateNotUsed(response, '404.html')
+        self.assertTemplateNotUsed(response, '500.html')
+        self.assertNotIn('presentation', response.context)
+        self.assertNotIn('application', response.context)
+        self.assertNotIn('api', response.context)
+        self.assertNotIn('documentation', response.context)
+        self.assertNotIn('footer', response.context)
 
 
     def test_404_view(self):
