@@ -1,28 +1,38 @@
-// Pop up
-$(function(){
-    $(".popup-light").click(function() {
-        var obj = $(this),
-            popupClass = obj.data("popupClass"),
-            popupWidth = obj.data("popupWidth"),
-            objPopup =  $('.' + popupClass);
+$(document).ready(function() {
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 1) {
+      $('body').addClass("sticky");
+    } else {
+      $('body').removeClass("sticky");
+    }
+  });
+  // smooth scroll
+  $(".smooth-scroll").click(function() {
+    var target = $(this).attr("href"),
+      scrollTo = $(target).offset().top,
+      headerHeight = $('#Header').outerHeight();
+    console.log(headerHeight);
+    $('html, body').animate({ scrollTop: scrollTo - headerHeight });
+    $('#nav-icon1').trigger("click");
+    $("body").removeClass("menu-active");
+  });
+  //menu icon animation
+  $('#nav-icon1').click(function() {
+    $(this).toggleClass('open');
+    $("body").toggleClass("menu-active");
+  });
+  //menu link click
+});
 
-        objPopup
-            .css("width", popupWidth)
-            .prepend('<img src="static/cms/images/close.png" class="popup-btn-close" title="Close Window" alt="Close" />')
-            .css({
-                "margin-top":  -objPopup.outerHeight(true)/2,
-                "margin-left": -objPopup.outerWidth(true)/2
-            })
-            .fadeIn();
-
-        return false;
+// modal
+$(document).ready(function() {
+    $("#modal_open").click(function() {
+        $(".modal").fadeIn();
+        $(".message").slideDown();
     });
 
-    $("body").delegate(".popup-btn-close", "click", function(){
-        $('.popup-block').fadeOut(function(){
-            $(".popup-btn-close").remove();
-        });
-
-        return false;
+    $("#modal_close").click(function() {
+        $(".message").slideUp();
+        $(".modal").fadeOut();
     });
 });
