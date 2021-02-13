@@ -19,7 +19,7 @@ class DocumentationTest(TestCase):
 
         documentation = self.model.objects.create(title=self.title, description=self.description, button=self.button)
 
-        self.assertEquals(documentation.objects.count(), 1)
+        self.assertEquals(Documentation.objects.count(), 1)
         self.assertEquals(documentation.title, self.title)
         self.assertEquals(documentation.description, self.description)
         self.assertEquals(documentation.button, self.button)
@@ -27,20 +27,6 @@ class DocumentationTest(TestCase):
         self.assertNotEquals(documentation.description, self.wrong_description)
         self.assertNotEquals(documentation.button, self.bad_button)
 
-
-    def test_create_documentation(self):
-        self.model.objects.create(title=self.title, description=self.description, button=self.button)
-
-        self.assertEquals(self.model.objects.count(), 1)
-
-        documentation = self.model.objects.latest('id')
-
-        self.assertEquals(documentation.title, self.title)
-        self.assertEquals(documentation.description, self.description)
-        self.assertEquals(documentation.button, self.button)
-        self.assertNotEquals(documentation.title, self.bad_title)
-        self.assertNotEquals(documentation.description, self.wrong_description)
-        self.assertNotEquals(documentation.button, self.bad_button)
 
     def test_read_documentation(self):
         self.model.objects.create(title=self.title, description=self.description, button=self.button)
@@ -55,6 +41,7 @@ class DocumentationTest(TestCase):
         self.assertNotEquals(documentation.title, self.bad_title)
         self.assertNotEquals(documentation.description, self.wrong_description)
         self.assertNotEquals(documentation.button, self.bad_button)
+
 
     def test_update_documentation(self):
         self.model.objects.create(title=self.title, description=self.description, button=self.button)
