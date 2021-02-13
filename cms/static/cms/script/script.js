@@ -24,15 +24,15 @@ $(document).ready(function() {
   //menu link click
 });
 
-// modale
+// modal
 $(document).ready(function() {
-    $("#modale_open").click(function() {
-        $(".modale").fadeIn();
+    $("#modal_open").click(function() {
+        $(".modal").fadeIn();
         $(".message").slideDown();
     });
 
-    $("#modale_close").click(function() {
+    $("#modal_close").click(function() {
         $(".message").slideUp();
-        $(".modale").fadeOut();
+        $(".modal").fadeOut();
     });
 });
