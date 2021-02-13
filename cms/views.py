@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from cms.models import Presentation, Application, Api, Documentation, Footer
+from django.views.decorators.cache import cache_page
 
-from django.utils.translation import ugettext as _
-from django.utils.translation import ungettext
-
-
+@cache_page(60 * 1440)
 def index(request):
     data = {}
 
